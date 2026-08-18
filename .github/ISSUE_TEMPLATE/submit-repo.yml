@@ -1,0 +1,90 @@
+name: 🤖 Submit Repo for Bug Fixing
+description: Submit your repository for automated bug fixing. The agent will scan it at 8 PM IST.
+title: "[Bug-Fix] <your-repo-name>"
+labels: ["repo-submitted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🤖 Submit Your Repo for Automated Bug Fixing
+        
+        Fill out this form and our AI agent will scan your repo at the next 8 PM IST run.
+        
+        **Requirements:**
+        - Repo must be public
+        - Python projects are prioritized
+        - Must allow fork-based PRs
+  - type: input
+    id: repo-url
+    attributes:
+      label: Repository URL
+      description: The GitHub URL of your repo
+      placeholder: https://github.com/username/my-project
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Primary Language
+      options:
+        - Python
+        - JavaScript
+        - TypeScript
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: plan
+    attributes:
+      label: Plan
+      description: Which plan are you on? (Free plan = 1 repo, 5 bugs/month)
+      options:
+        - Free
+        - Starter (₹499/mo)
+        - Pro (₹1,499/mo)
+        - Enterprise
+      default: 0
+    validations:
+      required: true
+  - type: checkboxes
+    id: fix-types
+    attributes:
+      label: What should the agent fix?
+      options:
+        - label: Runtime bugs (crashes, exceptions)
+          required: false
+        - label: Type errors (missing hints, wrong types)
+          required: false
+        - label: Security issues (SQL injection, secrets)
+          required: false
+        - label: Code quality (PEP 8, dead code, imports)
+          required: false
+        - label: Test coverage (add missing tests)
+          required: false
+        - label: Performance issues
+          required: false
+  - type: textarea
+    id: focus-areas
+    attributes:
+      label: Specific Focus Areas (Optional)
+      description: Any specific files, modules, or areas you want the agent to focus on?
+      placeholder: "e.g., Focus on src/api/ module, especially authentication.py"
+    validations:
+      required: false
+  - type: textarea
+    id: known-issues
+    attributes:
+      label: Known Issues (Optional)
+      description: List any known bugs or issues you want fixed first
+      placeholder: "e.g., App crashes on empty input, login fails with special characters"
+    validations:
+      required: false
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Terms & Conditions
+      options:
+        - label: I confirm this repo is public and I allow the agent to fork it and submit PRs
+          required: true
+        - label: I understand all fixes will be submitted as PRs for my review (no direct pushes)
+          required: true
